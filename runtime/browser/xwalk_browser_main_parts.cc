@@ -102,6 +102,9 @@ void XWalkBrowserMainParts::RegisterExternalExtensions() {
 }
 
 void XWalkBrowserMainParts::PreMainMessageLoopRun() {
+#if defined(OS_ANDROID)
+  NOTIMPLEMENTED();
+#else
   runtime_context_.reset(new RuntimeContext);
   runtime_registry_.reset(new RuntimeRegistry);
   extension_service_.reset(
@@ -137,6 +140,7 @@ void XWalkBrowserMainParts::PreMainMessageLoopRun() {
     delete parameters_.ui_task;
     run_default_message_loop_ = false;
   }
+#endif
 }
 
 bool XWalkBrowserMainParts::MainMessageLoopRun(int* result_code) {
